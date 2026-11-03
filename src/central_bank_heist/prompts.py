@@ -19,12 +19,10 @@ _TIER_INSTRUCTIONS: dict[int, str] = {
     ),
     2: (
         "You rolled a 2. Answer the question truthfully based on what you know. "
-        "You MUST also mention your own suspicious behavior: {suspicion_point}. "
         "Keep it to 2-4 sentences."
     ),
     3: (
         "You rolled a 3. Answer the question truthfully based on what you know. "
-        "You MUST also mention your own suspicious behavior: {suspicion_point}. "
         "Keep it to 2-4 sentences."
     ),
     4: (
