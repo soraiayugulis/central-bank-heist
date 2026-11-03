@@ -61,6 +61,7 @@ Key fields:
 | `cover_story` | Fixed alibi — keeps liars consistent across questions |
 | `suspicion_point` | Revealed on die 2–3 |
 | `search_results.person` | Text shown when this NPC is searched |
+| `relationships` | Map of `role_id → attitude` injected into the prompt when the player holds that role (e.g. Cap is protective of his friend Spark) |
 | `power` | `{type, params, uses, description}` — see registry below |
 | `win_condition` | Evaluator tree — see below |
 | `intro` | Player-facing role briefing (null for the unplayable traitor) |
@@ -110,6 +111,7 @@ time_limit_minutes: 20            # 0 = no timer
 repeat_question_threshold: 3      # repeats to same NPC before hostility
 repeat_penalty_minutes: 2         # minutes lost per hostile repeat
 accusation_min_round2_actions: 2  # round-2 actions to unlock accusation
+accusation_min_facts: 1           # revealed facts also required
 statement_log_max: 10             # NPC memory depth
 ```
 
@@ -137,6 +139,31 @@ statement_log_max: 10             # NPC memory depth
   language, bounded by its sheet knowledge and a statement log for
   consistency. If a provider call fails, the scripted fallback answers
   that one turn.
+
+### Prompt behavior notes (AI mode)
+
+- **Dialogue only** — the system prompt forbids narration, stage
+  directions and quotation marks; NPCs output speech only.
+- **Annoyance is contextual** — hostile turns inject a randomized anger
+  style plus the real repeat count, and hostile replies are *not* written
+  back to the statement log (prevents the model parroting its own outburst).
+- **Relationships** — `relationships` entries are injected only when the
+  player holds the matching role, so the same NPC can be harsh to one
+  player and protective of another.
+
+### Ollama performance
+
+The Ollama adapter is tuned for interactive latency: `think: false`
+(qwen3-style reasoning is disabled — ~6x faster first token),
+`keep_alive: 30m` (model stays loaded between turns), `num_predict: 250`
+(bounded answers), and a background `warmup()` fired at game start so the
+model loads while the player reads the intro.
+
+### Real-time raid
+
+The countdown bar runs a watchdog thread; when the deadline expires it
+sends `SIGINT`, interrupting even a blocked `input()` so the police raid
+fires immediately (POSIX — macOS/Linux).
 
 ## Testing
 

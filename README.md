@@ -71,3 +71,8 @@ you never lose progress.
   accusations, annoyance, timer, and every role's win condition.
 - **[DEVELOPMENT.md](DEVELOPMENT.md)** — dev setup, project structure,
   editing character sheets, tunables, env vars, debug mode, providers.
+
+## License
+
+[PolyForm Noncommercial 1.0](LICENSE) — free to download, play, study and
+modify. Commercial use is not permitted without the author's permission.

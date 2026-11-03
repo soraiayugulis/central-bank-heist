@@ -51,7 +51,8 @@ Everything from Round 1 still applies, plus search actions:
 
 ## Accusation
 
-After **2 actions in Round 2**, "Accuse a suspect" unlocks. Pick who you
+After **2 actions in Round 2 AND at least 1 real discovery** (a successful
+search that reveals evidence), "Accuse a suspect" unlocks. Pick who you
 think betrayed the crew — then decide:
 
 - **Execute** — the crew handles it internally
@@ -93,10 +94,17 @@ When enabled, your power is shown in your intro and offered at the right
 moment (e.g., Spark's goggles force a die to 6 in Round 1, Mr. Whitfield's
 panic attack forces an NPC's die to 1).
 
+### Relationships
+
+NPCs treat you differently depending on who you are. Cap, for example,
+has a soft spot for his longtime friend — play that role and the boss's
+anger is aimed at the situation, never at you.
+
 ## Endings
 
-- **Timeout** — the countdown hits zero: police raid. For most roles this
-  is a loss… but not for everyone.
+- **Timeout** — the countdown hits zero and the police breach
+  **immediately**, interrupting whatever you're doing (even mid-typing).
+  For most roles this is a loss… but not for everyone.
 - **Accusation** — the game evaluates your role's objective, then narrates
   what the police find when they breach: the scene varies with who you
   accused, whether they were executed, and which evidence you uncovered
