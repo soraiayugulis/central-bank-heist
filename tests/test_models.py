@@ -106,9 +106,15 @@ class TestAccusationGating:
         state.round2_actions = 1
         assert state.accusation_unlocked is False
 
-    def test_unlocked_after_min_actions(self, state):
+    def test_locked_with_actions_but_no_facts(self, state):
         state.current_round = Round.ROUND_2
         state.round2_actions = 2
+        assert state.accusation_unlocked is False
+
+    def test_unlocked_with_actions_and_fact(self, state):
+        state.current_round = Round.ROUND_2
+        state.round2_actions = 2
+        state.revealed_facts.add("dirty_cash")
         assert state.accusation_unlocked is True
 
 

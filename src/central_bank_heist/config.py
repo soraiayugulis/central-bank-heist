@@ -15,6 +15,7 @@ _DEFAULTS = {
     "repeat_question_threshold": 3,
     "repeat_penalty_minutes": 2,
     "accusation_min_round2_actions": 2,
+    "accusation_min_facts": 1,
     "statement_log_max": 10,
 }
 
@@ -29,6 +30,7 @@ class GameConfig:
     repeat_question_threshold: int = 3
     repeat_penalty_minutes: int = 2
     accusation_min_round2_actions: int = 2
+    accusation_min_facts: int = 1
     statement_log_max: int = 10
 
 

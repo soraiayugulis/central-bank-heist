@@ -98,6 +98,7 @@ class GameState:
         return (
             self.current_round == Round.ROUND_2
             and self.round2_actions >= self.config.accusation_min_round2_actions
+            and len(self.revealed_facts) >= self.config.accusation_min_facts
         )
 
     def get_annoyance(self, npc_id: str) -> Annoyance:
