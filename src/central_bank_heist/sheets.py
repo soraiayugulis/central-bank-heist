@@ -103,6 +103,7 @@ class CharacterSheet:
     win_condition: WinCondition | None = None
     intro: str | None = None
     search_results: dict[str, str] = field(default_factory=dict)
+    relationships: dict[str, str] = field(default_factory=dict)
 
     def prompt_sections(self) -> dict[str, str]:
         """Render all sheet data into prompt-friendly sections.
@@ -211,6 +212,7 @@ def _parse_sheet(data: dict) -> CharacterSheet:
         win_condition=_parse_win_condition(data.get("win_condition")),
         intro=data.get("intro"),
         search_results=data.get("search_results", {}),
+        relationships=data.get("relationships", {}),
     )
 
 

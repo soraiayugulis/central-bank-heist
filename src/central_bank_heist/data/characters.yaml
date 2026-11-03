@@ -17,6 +17,8 @@
     - "his retirement plans and the expensive tickets"
   cover_story: ~
   can_lie: false
+  relationships:
+    spark: "Spark is your longtime friend — practically family. You are furious about the SITUATION and the betrayal, never at him. Protect him even when lashing out at everyone else."
   suspicion_point: "he is the only one with the trunk keys and was distracted during loading"
   pocket:
     - "Plans and expensive travel tickets to the Maldives"
@@ -31,8 +33,9 @@
     disappearing to the Maldives. You supervised the bags from the bank door to the
     trunk — but you were already dreaming of beaches and didn't check the weight or
     contents of a single bag. Now the money is gone, replaced by shredded newspaper.
-    The federal police sirens are getting closer. Someone sold you out.
-    You need to find the money AND the traitor before the police arrive, or you'll rot in prison.
+    The federal police sirens are getting closer. Someone sold you out — and if
+    the cash and the rat aren't both in your hands before they reach that door,
+    it's all over.
   search_results:
     person: "Plans and an expensive one-way ticket to the Maldives. Looks like Cap was planning to disappear..."
 
@@ -106,9 +109,9 @@
     chance to bring down Cap, the boss. During the extended smoke you planted a GPS
     tracker under the driver's seat to signal the feds. You were the first to reach
     the car and found an unconscious hostage inside. Now the money has vanished and
-    things are getting chaotic. You need to pin this on Cap — he's the big fish — and
-    you need the money found as evidence. Cap must be taken ALIVE —
-    handed to the police, not executed. Don't blow your cover.
+    things are getting chaotic. Months of work led to this moment — Cap answering
+    for this crew in handcuffs, alive, your collar. And that money is your evidence;
+    it cannot just vanish. Whatever happens, don't blow your cover.
   search_results:
     person: "A small slip of paper with what appear to be GPS coordinates. They point to... the federal police central headquarters."
 
@@ -150,8 +153,9 @@
     everyone a window of total darkness... except you. Your special goggles let you
     see through the haze. You noticed someone crouching near the bags, but it was
     too chaotic to be sure who. Now the money is gone and you feel responsible for
-    creating the opportunity. Find the money and get anyone EXCEPT Cap accused —
-    he's your friend. Resolve this before the police arrive.
+    creating the opportunity. The cash has to turn up — and you'll be damned if
+    Cap takes the fall for a job HE didn't botch. Not him. Anyone but him,
+    before those sirens get here.
   search_results:
     person: "A compact smoke explosive charge — a spare one. Spark always carries a backup."
 
@@ -185,8 +189,8 @@
     the bags from the bank to the car. When you got to the car, Wheels wasn't there,
     so you leaned against the bumper and had a smoke while waiting. Nothing fancy,
     nothing shady. Now the money is gone and everyone is pointing fingers. You just
-    want your cut and to get out before the feds show up. Find the money and get
-    the traitor — or that suspicious quiet guy Ghost — accused. Before the cops breach.
+    want your cut and to get out before the feds show up. Get the cash found and
+    get the right bastard blamed.
   search_results:
     person: "Empty pockets. Brick came with nothing and has nothing to show for it."
 
@@ -222,9 +226,9 @@
     But the heist dragged on too long and you panicked — you went to find Cap to get
     the trunk key, but couldn't find him in the smoke. When you got back, everyone was
     already at the car waiting for you. Now the money has vanished and people are
-    looking at you funny for leaving the car. You don't care who takes the fall —
-    just make sure the crew reaches a verdict BEFORE the feds bust down the door,
-    and come out of it breathing.
+    looking at you funny for leaving the car. You don't give a damn who the rat is —
+    you just want this over with. A name, a decision, and out that door
+    before the sirens hit the gate.
   search_results:
     person: "A crumpled $10 bill and a bus ticket. Hardly the spoils of a heist."
 
@@ -271,9 +275,7 @@
     give the undercover agent (Ghost) extra time to plant a GPS tracker. You also
     knocked out the bank manager so Ghost could work. Your right hand is still red
     from the slap. Now the money is gone and the gang is turning on each other.
-    Your mission: Ghost must NOT be executed. If he's accused and handed to the
-    police alive, that's fine — but nobody puts a bullet in him. Steer the crew
-    carefully.
+    Ghost is your ticket out of a life sentence.
   search_results:
     person: "A yellowed newspaper clipping about a past bank robbery — and his right hand is noticeably red and swollen."
 
@@ -311,7 +313,7 @@
     came alone and slapped you hard — you blacked out. Right before losing consciousness
     you heard two voices whispering about needing to 'plant' something.
     Now you're in a hideout full of armed criminals pointing guns at each other.
-    You don't care about the money. Keep them talking, delay the verdict — you win
-    the moment the police breach the door.
+    You want a rescue. Those sirens outside are your only way out
+    of this alive.
   search_results:
     person: "Empty pockets. Just a terrified bank manager in a crumpled suit."
