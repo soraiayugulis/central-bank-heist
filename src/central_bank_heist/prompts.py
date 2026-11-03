@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import random
+
 from central_bank_heist.models import Annoyance
 from central_bank_heist.sheets import CharacterSheet
 
@@ -54,11 +56,24 @@ _ANNOYANCE_INSTRUCTIONS: dict[str, str] = {
         "but still provide your response. Sound mildly irritated."
     ),
     "hostile": (
-        "The player keeps asking you the same things repeatedly. You are ANGRY. "
-        "Give a very short, hostile response (1-2 sentences). "
-        "Make it clear you're done repeating yourself. Be aggressive."
+        "The player is re-asking things you already answered — this is the "
+        "{repeat_count}th time they come to you. You are FURIOUS. "
+        "In 2-3 sentences, angrily call out the specific topic they keep repeating "
+        "and give them nothing beyond what you already said. "
+        "Express the anger as: {hostile_style}. "
+        "CRITICAL: write a completely NEW response — do not reuse any words, "
+        "phrasing, or structure from your previous statements."
     ),
 }
+
+_HOSTILE_STYLES = [
+    "explosive and shouting",
+    "cold and menacing",
+    "sarcastic and biting",
+    "dismissive and condescending",
+    "threatening to walk away",
+    "fed up, mocking the player's detective skills",
+]
 
 # ---------------------------------------------------------------------------
 # System prompt builder
@@ -77,6 +92,8 @@ def build_system_prompt(
         "Stay STRICTLY in character at all times. Never break the fourth wall.",
         "Never mention dice, game mechanics, rounds, or anything meta.",
         "Respond in English, 2-5 sentences, in first person.",
+        "Output ONLY spoken dialogue. Never describe actions, gestures, or use "
+        "narration, stage directions, or quotation marks. Just what you say.",
         "Never invent facts about the crime that are not in your knowledge below.",
         "Never reveal items listed under CONCEALS even if directly asked.",
         "",
@@ -100,6 +117,12 @@ def build_system_prompt(
     lines.append(f"The player is {player_sheet.codename} ({player_sheet.role}).")
     if player_sheet.suspicion_point:
         lines.append(f"Their suspicious behavior: {player_sheet.suspicion_point}")
+    relationship = npc_sheet.relationships.get(player_sheet.id)
+    if relationship:
+        lines.append(
+            f"Your relationship with them: {relationship} "
+            "Stay true to this relationship in EVERY response, even when angry."
+        )
 
     if statement_log:
         lines.append("\n=== YOUR PREVIOUS STATEMENTS (do not contradict) ===")
@@ -114,6 +137,7 @@ def build_user_prompt(
     die_tier: int,
     annoyance: Annoyance,
     npc_sheet: CharacterSheet,
+    repeat_count: int = 0,
 ) -> str:
     """Build the user-message prompt with die-tier instructions."""
     parts: list[str] = []
@@ -127,7 +151,10 @@ def build_user_prompt(
     if annoyance != Annoyance.NONE:
         overlay = _ANNOYANCE_INSTRUCTIONS.get(annoyance.value, "")
         if overlay:
-            parts.append(overlay)
+            parts.append(
+                overlay.replace("{hostile_style}", random.choice(_HOSTILE_STYLES))
+                .replace("{repeat_count}", str(repeat_count))
+            )
 
     if npc_sheet.can_lie:
         parts.append(
@@ -135,7 +162,7 @@ def build_user_prompt(
             "your cover story and previous statements."
         )
 
-    parts.append(f'\nThe player ({question[:500]})')
+    parts.append(f'\nThe player asks: "{question[:500]}"')
 
     return "\n\n".join(parts)
 

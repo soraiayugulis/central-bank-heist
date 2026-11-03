@@ -159,14 +159,38 @@ _ANNOYANCE_RESPONSES: dict[str, dict[str, list[str]]] = {
         "manager": ["P-please, I already told you everything I know about that..."],
     },
     "hostile": {
-        "boss": ["Ask me that again and we're going to have a problem. I said what I said."],
-        "traitor": ["Are you trying to waste time? Because that's what you're doing. Back off."],
-        "ghost": ["Enough. I've answered this. You're burning through our clock asking the same thing."],
-        "spark": ["Stop! I already told you everything I know about that! This is wasting everyone's time!"],
-        "brick": ["I'm done repeating myself. Ask me something new or shut up."],
-        "wheels": ["For the last time — I TOLD you! Stop circling back and do something useful!"],
-        "shade": ["STOP asking me that! I can't— I already— just leave me alone about it!"],
-        "manager": ["Please stop! I already told you! I'm begging you, ask someone else!"],
+        "boss": [
+            "Ask me that again and we're going to have a problem. I said what I said.",
+            "You're wasting my time AND yours. The clock's ticking — go interrogate someone else.",
+        ],
+        "traitor": [
+            "Are you trying to waste time? Because that's what you're doing. Back off.",
+            "We DONE here? You keep coming back with the same crap while the feds get closer.",
+        ],
+        "ghost": [
+            "Enough. I've answered this. You're burning through our clock asking the same thing.",
+            "Same question, same answer. Look at your notes — I already gave you what I know.",
+        ],
+        "spark": [
+            "Stop! I already told you everything I know about that! This is wasting everyone's time!",
+            "I— okay, you know what? I'm done. The math doesn't change no matter how many times you ask!",
+        ],
+        "brick": [
+            "I'm done repeating myself. Ask me something new or shut up.",
+            "You deaf? I told you already. Go bother someone who actually did something.",
+        ],
+        "wheels": [
+            "For the last time — I TOLD you! Stop circling back and do something useful!",
+            "Look, we both know I messed up leaving the car. Asking again won't change that!",
+        ],
+        "shade": [
+            "STOP asking me that! I can't— I already— just leave me alone about it!",
+            "Why do you keep coming back to me?! I don't— I'm not the one you want!",
+        ],
+        "manager": [
+            "Please stop! I already told you! I'm begging you, ask someone else!",
+            "I can't— I don't know anything else! Please, the police will sort this out anyway...",
+        ],
     },
 }
 

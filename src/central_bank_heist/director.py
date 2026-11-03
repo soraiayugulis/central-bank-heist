@@ -201,6 +201,7 @@ class Director:
             die_tier=final,
             annoyance=annoyance,
             npc_sheet=npc_sheet,
+            repeat_count=state.question_counts.get(npc_id, 0),
         )
 
         if isinstance(self.provider, ScriptedProvider):
@@ -216,7 +217,8 @@ class Director:
             else:
                 response = "..."
 
-        state.record_statement(npc_id, response)
+        if annoyance != Annoyance.HOSTILE:
+            state.record_statement(npc_id, response)
         return raw, final, annoyance, response
 
     def stream_npc(
@@ -262,6 +264,7 @@ class Director:
             die_tier=final,
             annoyance=annoyance,
             npc_sheet=npc_sheet,
+            repeat_count=state.question_counts.get(npc_id, 0),
         )
 
         if isinstance(self.provider, ScriptedProvider):
