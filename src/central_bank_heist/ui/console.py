@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import os
+import signal
 import sys
 import threading
 import time
@@ -145,6 +147,11 @@ def _paint_timer_bar(state: GameState) -> None:
 def _timer_loop(state: GameState) -> None:
     while not _timer_stop.wait(1.0):
         _paint_timer_bar(state)
+        if state.is_timed_out:
+            _timer_stop.set()
+            # Interrupt the main thread (even mid-input) so the raid fires NOW
+            os.kill(os.getpid(), signal.SIGINT)
+            return
 
 
 def start_timer_bar(state: GameState) -> None:

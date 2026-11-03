@@ -66,10 +66,6 @@ def _show_how_to_play() -> None:
         "[bold yellow]ROUND 1 — INTERROGATION[/]\n"
         "Pick an NPC to question. Roll a die — the result determines how\n"
         "much they reveal:\n"
-        "  1 = confused / evasive\n"
-        "  2-3 = answers + reveals their own suspicious behavior\n"
-        "  4-5 = answers + offers their own suspicion of others\n"
-        "  6 = deflects and accuses someone else\n\n"
         "[bold yellow]ROUND 2 — SEARCH & PRESSURE[/]\n"
         "You can still question NPCs, but now you can also:\n"
         "  - Search a person (reveals what's in their pockets)\n"
@@ -114,6 +110,9 @@ def _play_game() -> None:
     director = Director()
     state = director.new_game()
 
+    if hasattr(director.provider, "warmup"):
+        director.provider.warmup()
+
     ui.clear()
     _show_game_intro()
     ui.clear()
@@ -135,6 +134,12 @@ def _play_game() -> None:
         # If player exits round 2 without accusing and accusation is unlocked
         if state.accusation_unlocked and state.current_round != Round.ENDED:
             _run_accusation(state, director)
+    except KeyboardInterrupt:
+        # Deadline watchdog interrupted an input mid-wait — police breach NOW
+        if state.is_timed_out and state.current_round != Round.ENDED:
+            _show_raid_ending(state, director)
+        elif not state.is_timed_out:
+            raise
     finally:
         ui.stop_timer_bar()
 
@@ -165,8 +170,9 @@ def _show_intro(state: GameState) -> None:
     if sheet.pocket:
         ui.console.print(f"[bold]POCKET:[/] {', '.join(sheet.pocket)}")
 
-    objective = _get_objective_text(sheet.id)
-    ui.console.print(f"\n[bold red]OBJECTIVE:[/] {objective}")
+    if is_debug():
+        objective = _get_objective_text(sheet.id)
+        ui.console.print(f"\n[bold red]OBJECTIVE:[/] {objective}")
     ui.console.print()
     ui.prompt_enter("Press Enter to begin")
 
@@ -290,7 +296,8 @@ def _do_question(state: GameState, director: Director, npc_id: str) -> None:
     ui.console.print(f"\n[bold]{npc_sheet.codename}:[/]")
     full_text = ui.stream_typewriter(token_iter)
 
-    state.record_statement(npc_id, full_text)
+    if annoyance != Annoyance.HOSTILE:
+        state.record_statement(npc_id, full_text)
     ui.console.print()
 
 
