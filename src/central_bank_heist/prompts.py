@@ -114,7 +114,11 @@ def build_system_prompt(
         lines.append(f"\nCONCEALS (NEVER reveal these):\n{sections['conceals']}")
 
     lines.append(f"\n=== THE PLAYER ===")
-    lines.append(f"The player is {player_sheet.codename} ({player_sheet.role}).")
+    lines.append(
+        f"The person talking to you is {player_sheet.codename} "
+        f"({player_sheet.role}). ALWAYS address them as 'you' — never refer "
+        "to them by name or in third person. You may suspect them, but say it TO them."
+    )
     if player_sheet.suspicion_point:
         lines.append(f"Their suspicious behavior: {player_sheet.suspicion_point}")
     relationship = npc_sheet.relationships.get(player_sheet.id)
