@@ -1,7 +1,5 @@
 # Central Bank Heist
 
-A single-player CLI social deduction game powered by AI.
-
 > The engine ticks as it cools in the corner of the warehouse. Diesel and
 > gunpowder cling to everything — the car, your clothes, your hands.
 >
