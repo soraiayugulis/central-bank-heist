@@ -95,7 +95,7 @@ _GAME_INTRO = (
     "Outside, the rain is relentless. An hour ago you emptied the vaults of "
     "the Central Bank. The plan was flawless. The execution... wasn't.\n\n"
     "The charge on vault 404 burned for too long, and the world "
-    "went black. Nobody saw what happened in that darkness. Somebody did.\n\n"
+    "went black. Nobody saw what happened in that darkness. Well, somebody did.\n\n"
     "Now the money bags sit open in front of the crew — stuffed with shredded "
     "newspaper. Every single one of them.\n\n"
     "Sirens are already threading through the rain, getting closer. The federal "
