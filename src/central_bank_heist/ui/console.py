@@ -35,6 +35,12 @@ def print_panel(content: str, title: str = "", style: str = "white") -> None:
 def print_die_animation(final_value: int, frames: int = 8, delay: float = 0.12) -> None:
     """Animate a rolling die, landing on final_value."""
     import random as _rng
+    with pause_timer_paint():
+        _print_die_animation_inner(final_value, frames, delay)
+
+
+def _print_die_animation_inner(final_value: int, frames: int, delay: float) -> None:
+    import random as _rng
     for i in range(frames):
         face_val = _rng.randint(1, 6)
         face = DIE_FACES.get(face_val, "")
@@ -59,20 +65,22 @@ def print_portrait(npc_id: str) -> None:
 
 def typewriter(text: str, delay: float = 0.02, style: str = "italic") -> None:
     """Print text with a typewriter effect."""
-    for char in text:
-        console.print(f"[{style}]{char}[/]", end="", highlight=False)
-        time.sleep(delay)
-    console.print()
+    with pause_timer_paint():
+        for char in text:
+            console.print(f"[{style}]{char}[/]", end="", highlight=False)
+            time.sleep(delay)
+        console.print()
 
 
 def stream_typewriter(token_iter, style: str = "italic") -> str:
     """Stream tokens with typewriter effect, return full text."""
     full_text = ""
-    for token in token_iter:
-        full_text += token
-        console.print(f"[{style}]{token}[/]", end="", highlight=False)
-        time.sleep(0.01)
-    console.print()
+    with pause_timer_paint():
+        for token in token_iter:
+            full_text += token
+            console.print(f"[{style}]{token}[/]", end="", highlight=False)
+            time.sleep(0.01)
+        console.print()
     return full_text
 
 
@@ -109,6 +117,21 @@ def print_timer(state: GameState) -> None:
 _timer_thread: threading.Thread | None = None
 _timer_stop = threading.Event()
 _timer_paint_lock = threading.Lock()
+_timer_paint_paused = threading.Event()
+
+
+class pause_timer_paint:
+    """Pause the status-bar repaint while text is being written (streaming).
+
+    Repainting the bottom line mid-print would corrupt in-progress output,
+    so the watchdog thread skips ticks until the writer finishes.
+    """
+
+    def __enter__(self):
+        _timer_paint_paused.set()
+
+    def __exit__(self, *exc):
+        _timer_paint_paused.clear()
 
 
 def _bar_color(remaining: float) -> str:
@@ -146,7 +169,8 @@ def _paint_timer_bar(state: GameState) -> None:
 
 def _timer_loop(state: GameState) -> None:
     while not _timer_stop.wait(1.0):
-        _paint_timer_bar(state)
+        if not _timer_paint_paused.is_set():
+            _paint_timer_bar(state)
         if state.is_timed_out:
             _timer_stop.set()
             # Interrupt the main thread (even mid-input) so the raid fires NOW
